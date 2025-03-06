@@ -14,3 +14,202 @@ import numpy as np
 a = np.arange(10)
 a
 ```
+
+## Palmerpenguins 데이터셋 확인
+
+```{python}
+from palmerpenguins import load_penguins
+import pandas as pd
+import numpy as np
+penguins = load_penguins()
+penguins.keys
+columns_df = pd.DataFrame(penguins.columns, columns=['Column Names'])
+print(f"조사 개체수: {len(penguins)}")
+columns_df
+```
+
+- 설명
+    - Adelie, Chinstrap, Gentoo 총 3개의 펭귄 종이 존재
+    - island : 서식지
+    - bill_length_mm : 부리 길이
+    - bill_depth_mm : 부리 깊이
+    - flipper_length_mm : 날개 길이
+    - body_mass_g : 몸무게
+    - sex : 성별
+    - year : 조사 년도
+
+## Palmerpenguins 종, 성별별 분석
+
+```{python}
+Adelie_M = penguins[(penguins["species"] == "Adelie")&(penguins["sex"] == "male")]
+Adelie_FM = penguins[(penguins["species"] == "Adelie")&(penguins["sex"] == "female")]
+Chinstrap_M = penguins[(penguins["species"] == "Chinstrap")&(penguins["sex"] == "male")]
+Chinstrap_FM = penguins[(penguins["species"] == "Chinstrap")&(penguins["sex"] == "female")]
+Gentoo_M = penguins[(penguins["species"] == "Gentoo")&(penguins["sex"] == "male")]
+Gentoo_FM = penguins[(penguins["species"] == "Gentoo")&(penguins["sex"] == "female")]
+
+gender_species = pd.DataFrame({
+})
+gender_species["Adelie_FM"] = Adelie_FM.describe().iloc[1]
+gender_species["Adelie_M"] = Adelie_M.describe().iloc[1]
+gender_species["Chinstrap_FM"] = Chinstrap_FM.describe().iloc[1]
+gender_species["Chinstrap_M"] = Chinstrap_M.describe().iloc[1]
+gender_species["Gentoo_FM"] = Gentoo_FM.describe().iloc[1]
+gender_species["Gentoo_M"] = Gentoo_M.describe().iloc[1]
+gender_species
+
+#종 성별별 조사 개체수
+penguins = penguins.dropna()
+
+check_adelie_male = penguins[(penguins['sex'] =='male') & (penguins['species'] =='Adelie')]
+check_adelie_female= penguins[(penguins['sex'] =='female') & (penguins['species'] =='Adelie')]
+
+check_adelie_male=check_adelie_male.count()["sex"]
+check_adelie_female=check_adelie_female.count()["sex"]
+
+check_chinstrap_male= penguins[(penguins['sex'] =='male') & (penguins['species'] =='Chinstrap')]
+check_chinstrap_female= penguins[(penguins['sex'] =='female') & (penguins['species'] =='Chinstrap')]
+
+check_chinstrap_male=check_chinstrap_male.count()["sex"]
+check_chinstrap_female=check_chinstrap_female.count()["sex"]
+
+check_Gentoo_male= penguins[(penguins['sex'] =='male') & (penguins['species'] =='Gentoo')]
+check_Gentoo_female= penguins[(penguins['sex'] =='female') & (penguins['species'] =='Gentoo')]
+
+
+check_Gentoo_male=check_Gentoo_male.count()["sex"]
+check_Gentoo_female=check_Gentoo_female.count()["sex"]
+
+sex=np.array([check_adelie_female,check_adelie_male,check_chinstrap_female,check_chinstrap_male,check_Gentoo_female,check_Gentoo_male])
+sex = pd.DataFrame(sex)
+
+sex = sex.T
+
+sex.columns = ['Adelie_FM','Adelie_M','Chinstrap_FM','Chinstrap_M','Gentoo_FM','Gentoo_M']
+total = pd.concat([gender_species,sex],axis=0)
+total.index= ['bill_length_mm','bill_depth_mm','flipper_length_mm','body_mass_g','year','number']
+
+#종 성별 조사 개체수 및 평균 정보
+total
+```
+
+```{python}
+na_peng = penguins.dropna()
+
+#문제 
+# 각 펭귄 종별 특징 알아내서 발표
+# 아델 주 서식지
+A = na_peng['species'] == 'Adelie'
+Adel = na_peng.loc[A,:]
+Ai = Adel['island']
+adel_island = pd.Series(Ai.value_counts(), name='Adelie')
+ ## island
+ ## Dream        55
+ ## Torgersen    47
+ ## Biscoe       44
+ ## Name: count, dtype: int64
+
+# Chinstrap
+C = na_peng['species'] == 'Chinstrap'
+Chin = na_peng.loc[C,:]
+Ci = Chin['island']
+Chin_island = pd.Series(Ci.value_counts(), name='Chinstrap')
+ ## island
+ ## Dream    68
+ ## Name: count, dtype: int64
+
+# Gentoo
+G = na_peng['species'] == 'Gentoo'
+Gen = na_peng.loc[G,:]
+Gi = Gen['island']
+Gen_island = pd.Series(Gi.value_counts(), name='Gentoo')
+Gen_island = Gi.value_counts()
+ ## island
+ ## Biscoe    119
+ ## Name: count, dtype: int64
+
+# 종별 서식지 최종종
+peng_island = pd.DataFrame({
+})
+peng_island = pd.concat([adel_island, Chin_island, Gen_island], axis=1)
+
+
+peng_island
+```
+
+## 결과 분석
+
+- Adelie 펭귄
+    - Adelie 수컷
+        - 조사기간: 2008년도
+        - 조사개체수: 73
+        - 부리의 길이는 짧다
+        - 부리의 두께는 두껍다
+        - 날개의 길이는 평균적으로 작다
+        - 무게는 평균적으로 가볍다
+        - Adelie 수컷 펭귄의 경우 다른 종 수컷 펭귄보다 전체적으로 작다.
+    - Adelie 암컷
+        - 조사기간: 2008년도
+        - 조사개체수: 73
+        - 부리의 길이와 두께 모두 평균적으로 작다
+        - 날개의 길이는 평균적으로 작다
+        - 무게는 평균적으로 가볍다
+        - Adelie 암컷 펭귄의 경우 다른 종 암컷 펭귄보다 전체적으로 작다.
+    - Adelie 펭귄
+        - 모든 지역에 서식한다.
+        - Adelie 펭귄은 수컷이 암컷보다 크며 다른 종 펭귄에 비해 작은 사이즈를 가진다.
+
+<br>
+
+- Chinstrap 펭귄
+    - Chinstrap 수컷
+        - 조사기간: 2007~2008년도
+        - 조사개체수: 34
+        - 부리의 길이는 길다
+        - 부리의 두께는 두껍다
+        - 날개의 길이는 평균적으로 작다
+        - 무게는 평균적으로 가볍다
+        - Chinstrap 수컷 펭귄의 경우 다른 종 수컷 펭귄보다 전체적으로 작지만 부리의 길이가 길다
+    - Chinstrap 암컷
+        - 조사기간: 2007~2008년도
+        - 조사개체수: 34
+        - 부리의 길이는 길다
+        - 부리의 두께는 두껍다
+        - 날개의 길이는 평균적으로 작다
+        - 무게는 평균적으로 가볍다
+        - Chinstrap 암컷 펭귄의 경우 다른 종 암컷 펭귄보다 전체적으로 작지만 부리의 길이가 길다.
+    - Chinstrap 펭귄
+        - Dream 지역에 서식한다.
+        - Chinstrap 펭귄은 수컷이 암컷보다 크며 다른 종 펭귄에 비해 작은 사이즈를 가지며 부리의 길이는 몸에 비해 긴 특징을 가진다.
+
+<br>
+
+- Gentoo 펭귄
+    - Gentoo 수컷
+        - 조사기간: 2008년도
+        - 조사개체수: 58
+        - 부리의 길이는 평범하다
+        - 부리의 두께는 얇다
+        - 날개의 길이는 평균적으로 크다
+        - 무게는 평균적으로 무겁다
+        - Gentoo 수컷 펭귄의 경우 다른 종 수컷 펭귄보다 전체적으로 크지만 부리의 두께가 얇다.
+    - Gentoo 암컷
+        - 조사기간: 2008년도
+        - 조사개체수: 61
+        - 부리의 길이는 평범하다
+        - 부리의 두께는 얇다
+        - 날개의 길이는 평균적으로 크다
+        - 무게는 평균적으로 무겁다
+        - Gentoo 암컷 펭귄의 경우 다른 종 암컷 펭귄보다 전체적으로 크지만 부리의 두께가 얇다.
+    - Gentoo 펭귄
+        - Biscoe 지역에 서식한다.
+        - Gentoo 펭귄은 수컷이 암컷보다 크며 다른 종 펭귄에 비해 큰 사이즈를 가지며 부리의 두께는 몸에 비해 얇은 특징을 가진다.
+
+## 더 필요한 정보
+
+- describe() : 제이터 프레임의 요약 통계
+- 결측치에 대한 정보
+
+## 코드 간결화
+
+- 반복문 사용하여 코드 효울적으로 정리
