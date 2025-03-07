@@ -3,14 +3,13 @@ project:
   output-dir: docs
 
 website:
-  title: "juyeoun-blog"
+  title: "그냥 하는거지 뭐..."
   navbar:
     right:
       - about.qmd
       - icon: github
-        href: https://github.com/
-      - icon: twitter
-        href: https://twitter.com
+        href: https://github.com/leejuyeoun
+
 format:
   html:
     theme:

@@ -1,0 +1,32 @@
+---
+title: "공부해 이것아!"
+author: "ju"
+date: "2025-03-07"
+categories: [python, pandas, numpy]
+image: "image.jpg"
+---
+
+# 3월 7일 학습 내용
+
+## 파이썬 데이터 분석
+
+### 넘파이
+
+넘파이 패키지를 불러옵시다!
+
+```{python}
+import numpy as np
+```
+
+배열을 생성해 봅시다!
+
+```{python}
+a = np.array([3, 2, 15])
+a
+```
+
+### 판다스
+
+```{python}
+import pandas as pd
+```

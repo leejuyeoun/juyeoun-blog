@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "juyeoun-blog",
     "section": "",
-    "text": "Post With Code\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\nMar 6, 2025\n\n\nHarlow Malloc\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nMar 3, 2025\n\n\nTristan O’Malley\n\n\n\n\n\n\nNo matching items"
+    "text": "공부해 이것아!\n\n\n\n\n\n\npython\n\n\npandas\n\n\nnumpy\n\n\n\n\n\n\n\n\n\nMar 7, 2025\n\n\nju\n\n\n\n\n\n\n\n\n\n\n\n\nPost With Code\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\nMar 6, 2025\n\n\nHarlow Malloc\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nMar 3, 2025\n\n\nTristan O’Malley\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "posts/welcome/index.html",
@@ -61,5 +61,19 @@
     "title": "Post With Code",
     "section": "코드 간결화",
     "text": "코드 간결화\n\n반복문 사용하여 코드 효울적으로 정리"
+  },
+  {
+    "objectID": "posts/fist-post/index.html",
+    "href": "posts/fist-post/index.html",
+    "title": "공부해 이것아!",
+    "section": "",
+    "text": "넘파이 패키지를 불러옵시다!\n\nimport numpy as np\n\n배열을 생성해 봅시다!\n\na = np.array([3, 2, 15])\na\n\narray([ 3,  2, 15])\n\n\n\n\n\n\nimport pandas as pd"
+  },
+  {
+    "objectID": "posts/fist-post/index.html#파이썬-데이터-분석",
+    "href": "posts/fist-post/index.html#파이썬-데이터-분석",
+    "title": "공부해 이것아!",
+    "section": "",
+    "text": "넘파이 패키지를 불러옵시다!\n\nimport numpy as np\n\n배열을 생성해 봅시다!\n\na = np.array([3, 2, 15])\na\n\narray([ 3,  2, 15])\n\n\n\n\n\n\nimport pandas as pd"
   }
 ]
